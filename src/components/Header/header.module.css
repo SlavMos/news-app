@@ -1,0 +1,18 @@
+.Header {
+  display: flex;
+  width: 100%;
+  padding: 12px 24px;
+  background-color: #fff;
+  border-bottom: 1px solid #0d80f3;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.Title {
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.Date {
+  font-size: 27px;
+}
