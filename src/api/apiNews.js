@@ -1,5 +1,4 @@
 import axios from "axios"; // Импортируем axios для выполнения HTTP-запросов
-
 // Получаем базовый URL для API из переменных окружения
 const BASE_URL = import.meta.env.VITE_NEWS_BASE_API_URL;
 // Получаем API-ключ для аутентификации запросов из переменных окружения
@@ -14,7 +13,6 @@ export const getNews = async () => {
         apiKey: API_KEY,
       },
     });
-
     // Возвращаем данные из ответа API
     return response.data;
   } catch (error) {
