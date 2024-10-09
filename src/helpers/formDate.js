@@ -1,3 +1,4 @@
+// функиия которая показывает дату в н.в
 export const formData = (date) => {
   const options = {
     weekday: "long",
@@ -5,5 +6,5 @@ export const formData = (date) => {
     month: "long",
     day: "numeric",
   };
-  return date.toLocaleDateString("en-US", options); // Исправлена ошибка в названии метода
+  return date.toLocaleDateString("en-US", options);
 };

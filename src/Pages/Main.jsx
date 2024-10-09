@@ -1,9 +1,10 @@
+import NewsBanner from "../components/NewsBanner/NewsBanner";
 import s from "./main.module.css";
 
-const Main = () => {
+const Main = ({ item }) => {
   return (
     <main className={s.main}>
-      <h1>main</h1>
+      <NewsBanner />
     </main>
   );
 };

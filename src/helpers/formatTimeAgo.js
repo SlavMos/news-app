@@ -1,3 +1,5 @@
+// функция которая покахывает сколько времени прошло после публикации
+
 export const FormatTimeAgo = (dateString) => {
   const now = new Date();
   const date = new Date(dateString);
