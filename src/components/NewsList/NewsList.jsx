@@ -1,10 +1,13 @@
+import NewsItem from "../NewsItem/NewsItem";
 import s from "./newList.module.css";
 
-const NewsList = () => {
+const NewsList = ({ news }) => {
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <ul className={s.list}>
+      {news.map((item) => {
+        return <NewsItem key={item.id} item={item} />;
+      })}
+    </ul>
   );
 };
 

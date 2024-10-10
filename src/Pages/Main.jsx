@@ -18,8 +18,8 @@ const Main = () => {
   }, []);
   return (
     <main className={s.main}>
-      {news.length > 0 ? <NewsBanner item={news[6]} /> : null}
-      <NewsList />
+      {news.length > 0 ? <NewsBanner item={news[0]} /> : null}
+      <NewsList news={news} />
     </main>
   );
 };
