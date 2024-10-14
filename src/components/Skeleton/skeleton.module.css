@@ -1,0 +1,32 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Задаем расстояние между скелетонами */
+}
+
+.banner {
+  width: 100%;
+  padding-top: 100%; /* Задаем пропорции для баннера (квадрат) */
+  position: relative;
+}
+
+.item {
+  width: 100%;
+  height: 100px; /* Высота для элементов списка новостей */
+}
+
+.banner,
+.item {
+  background: linear-gradient(-90deg, #f0f0f0 0%, #f8f8f8 50%, #f0f0f0 100%);
+  background-size: 400% 400%; /* Настройки фона для эффекта анимации */
+  animation: pulse 1.2s ease-in-out infinite; /* Анимация "пульсации" */
+}
+
+@keyframes pulse {
+  0% {
+    background-position: 0% 0%; /* Начальная позиция фона */
+  }
+  100% {
+    background-position: -135% 0%; /* Конечная позиция фона для анимации */
+  }
+}
