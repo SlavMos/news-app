@@ -3,18 +3,39 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_NEWS_BASE_API_URL;
 const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 
-export const getNews = async (page_number, page_size) => {
+export const getNews = async ({ page_number, page_size, category }) => {
   try {
     const response = await axios.get(`${BASE_URL}search`, {
       params: {
         apiKey: API_KEY,
         page_number,
         page_size,
+        category,
       },
     });
-    console.log(response);
+    // console.log(response);
     // Выводим весь ответ в консоль
     // console.log("Response:", response);
+    // Возвращаем данные
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching news:", error);
+  }
+};
+// category в getNews и функция getCategories выполняют разные задачи:
+
+// Одна получает новости по конкретной категории,
+// Другая получает список всех возможных категорий для выбора.
+export const getCategories = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}available/categories`, {
+      params: {
+        apiKey: API_KEY,
+      },
+    });
+
+    // Выводим весь ответ в консоль
+    console.log("Response:", response);
     // Возвращаем данные
     return response.data;
   } catch (error) {

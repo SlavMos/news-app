@@ -8,7 +8,7 @@
 }
 
 .pagination__button,
-.pagination__page-button {
+.pagination__page_button {
   padding: 10px 15px;
   border: none;
   border-radius: 50%;
@@ -20,16 +20,16 @@
 }
 
 .pagination__button:hover,
-.pagination__page-button:hover {
+.pagination__page_button:hover {
   background-color: #007bff;
   color: white;
   transform: scale(1.1); /* Анимация при наведении */
 }
 
-.pagination__page-button.active {
+.pagination__page_button.active {
   background-color: #007bff;
   color: white;
-  font-weight: bold;
+  border: 1px solid #007bff;
 }
 
 .pagination__button:disabled {
@@ -50,7 +50,7 @@
   }
 
   .pagination__button,
-  .pagination__page-button {
+  .pagination__page_button {
     padding: 8px 12px;
     font-size: 0.875rem;
   }
@@ -58,8 +58,15 @@
 
 @media (max-width: 480px) {
   .pagination__button,
-  .pagination__page-button {
+  .pagination__page_button {
     padding: 6px 10px;
-    font-size: 0.75rem;
+    font-size: 0.55rem;
+  }
+}
+@media (max-width: 480px) {
+  .pagination__button,
+  .pagination__page_button {
+    padding: 3px 6px;
+    font-size: 0.55rem;
   }
 }
