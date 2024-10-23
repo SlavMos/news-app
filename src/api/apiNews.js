@@ -3,7 +3,12 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_NEWS_BASE_API_URL;
 const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 
-export const getNews = async ({ page_number, page_size, category }) => {
+export const getNews = async ({
+  page_number,
+  page_size,
+  category,
+  keywords,
+}) => {
   try {
     const response = await axios.get(`${BASE_URL}search`, {
       params: {
@@ -11,11 +16,12 @@ export const getNews = async ({ page_number, page_size, category }) => {
         page_number,
         page_size,
         category,
+        keywords,
       },
     });
     // console.log(response);
     // Выводим весь ответ в консоль
-    // console.log("Response:", response);
+
     // Возвращаем данные
     return response.data;
   } catch (error) {
@@ -35,7 +41,7 @@ export const getCategories = async () => {
     });
 
     // Выводим весь ответ в консоль
-    console.log("Response:", response);
+
     // Возвращаем данные
     return response.data;
   } catch (error) {

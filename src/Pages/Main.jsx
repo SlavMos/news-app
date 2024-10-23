@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import NewsBanner from "../components/NewsBanner/NewsBanner";
 import s from "./main.module.css";
 import { getCategories, getNews } from "../api/apiNews";
@@ -6,6 +6,8 @@ import NewsList from "../components/NewsList/NewsList";
 import Skeleton from "../components/Skeleton/Skeleton";
 import Pagination from "../components/Pagination/Pagination";
 import Categories from "../components/Categories/Categories";
+import Search from "../components/Search/Search";
+import { useDebounce } from "../helpers/hooks/useDebounce";
 
 const Main = () => {
   const [news, setNews] = useState([]);
@@ -13,46 +15,48 @@ const Main = () => {
   const [loading, setLoading] = useState(true); // Устанавливаем `loading` в `true` изначально
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1); // Начинаем с первой страницы
+  const [keywords, setKeywords] = useState("");
   const totalPages = 10; // Количество страниц (максимум)
   const pageSize = 10; // Количество новостей на одной странице
+  const debouncedKeywords = useDebounce(keywords, 500);
 
-  const fetchNews = async (currentPage) => {
+  const fetchNews = useCallback(async () => {
     setLoading(true);
     try {
-      // Вызываем API для получения новостей с указанием текущей страницы и размера страницы
       const response = await getNews({
         page_number: currentPage,
         page_size: pageSize,
         category: selectedCategory === "All" ? null : selectedCategory,
+        keywords: debouncedKeywords,
       });
-      setNews(response.news); // Сохраняем полученные новости в стейт
+      setNews(response.news);
     } catch (error) {
-      console.log(error); // Обрабатываем ошибки при загрузке данных
+      console.log(error);
     } finally {
-      setLoading(false); // Устанавливаем, что данные загружены (или произошла ошибка)
+      setLoading(false);
     }
-  };
+  }, [currentPage, pageSize, selectedCategory, debouncedKeywords]);
 
   const fetchCategories = async () => {
     try {
       // Вызываем API для получения категорий
       const response = await getCategories(); // Сохраняем полученные данные в стейт
       setCategories(["All", ...response.categories]);
-      console.log(response.categories);
     } catch (error) {
       console.log(error); // Обрабатываем ошибки при загрузке данных
     } finally {
       // Устанавливаем, что данные загружены (или произошла ошибка)
     }
   };
+  // 3. Загружаем категории один раз при монтировании
   useEffect(() => {
     fetchCategories();
   }, []);
 
-  // 3. Хук useEffect — вызываем fetchNews при изменении currentPage
+  // 4. Загружаем новости при изменении страницы или категории
   useEffect(() => {
-    fetchNews(currentPage); // Загружаем новости для текущей страницы при изменении currentPage
-  }, [currentPage, selectedCategory]); // Когда currentPage изменяется, useEffect снова срабатывает
+    fetchNews();
+  }, [fetchNews]); // Правильно добавляем fetchNews в зависимости
 
   const handleNextPage = () => {
     // для погинации чтобы при клике на > <  меняла страница
@@ -78,6 +82,7 @@ const Main = () => {
         categories={categories}
         setSelectedCategory={setSelectedCategory}
       />
+      <Search keywords={keywords} setKeywords={setKeywords} />
       {news.length > 0 && !loading ? ( // Проверяем, если новости есть и `loading` false
         <NewsBanner item={news[0]} />
       ) : (
