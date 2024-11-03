@@ -1,9 +1,9 @@
 import s from "./skeleton.module.css";
 
-const Skeleton = ({ count = 1, type }) => {
+const Skeleton = ({ count = 1, type, direction = "column" }) => {
   return (
     <div>
-      <ul className={s.list}>
+      <ul className={direction === "column" ? s.columnList : s.rowList}>
         {/* Вне зависимости от количества скелетонов используем `ul` для списка */}
         {[...Array(count)].map((_, index) => (
           <li

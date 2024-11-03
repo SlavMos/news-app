@@ -1,9 +1,10 @@
 import s from "./Categories.module.css";
 
 const Categories = ({ categories, setSelectedCategory, selectedCategory }) => {
+  const allCategories = ["All", ...categories.slice(0, 5)];
   return (
     <div className={s.category}>
-      {categories.map((categories) => {
+      {allCategories.map((categories) => {
         return (
           <button
             onClick={() => setSelectedCategory(categories)}
