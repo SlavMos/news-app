@@ -1,7 +1,7 @@
 import s from "./search.module.css";
 const Search = ({ keywords, setKeywords }) => {
   return (
-    <div>
+    <div className={s.search}>
       <input
         type="text"
         value={keywords}

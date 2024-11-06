@@ -17,3 +17,7 @@
 .input::placeholder {
   color: #888;
 }
+
+.search {
+  margin-top: 25px;
+}

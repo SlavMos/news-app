@@ -3,9 +3,10 @@ import NewsBanner from "../NewsBanner/NewsBanner";
 import s from "./bannerList.module.css";
 
 const BannerList = ({ banners, isLoading }) => {
+  const displayedBanners = banners?.slice(0, 9);
   return (
     <ul className={s.banners}>
-      {banners?.map((banners) => {
+      {displayedBanners?.map((banners) => {
         return <NewsBanner key={banners.id} item={banners} />;
       })}
     </ul>
